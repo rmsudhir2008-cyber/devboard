@@ -1,0 +1,14 @@
+import { useState } from 'react'
+import { Icon } from './Icon'
+
+export function RegistrationForm({ event, user, onClose, onComplete }) {
+  const [form, setForm] = useState({ name: user.name, email: 'frontdev@devboard.in', organisation: user.location, teamSize: '1', track: event.tags[0] || 'General', agreed: false })
+  const [error, setError] = useState('')
+  const update = (field, value) => setForm((current) => ({ ...current, [field]: value }))
+  const submit = (submitEvent) => {
+    submitEvent.preventDefault()
+    if (!form.agreed) return setError('Please confirm that the details are correct to complete registration.')
+    onComplete(form)
+  }
+  return <div className="modal-backdrop registration-backdrop" role="presentation" onMouseDown={onClose}><form className="registration-form" onSubmit={submit} onMouseDown={(mouseEvent) => mouseEvent.stopPropagation()}><button type="button" className="modal-close" onClick={onClose} aria-label="Close registration"><Icon name="close" size={18} /></button><div className={`registration-event-art ${event.visual}`}><span>{event.category}</span><b>{event.title}</b></div><p className="eyebrow">COMPLETE YOUR REGISTRATION</p><h2>Save your spot.</h2><p className="registration-copy">A few details, then this opportunity will be saved to your DevBoard profile.</p><div className="registration-fields"><label>Full name<input value={form.name} onChange={(inputEvent) => update('name', inputEvent.target.value)} required /></label><label>Email address<input type="email" value={form.email} onChange={(inputEvent) => update('email', inputEvent.target.value)} required /></label><label>College / organisation<input value={form.organisation} onChange={(inputEvent) => update('organisation', inputEvent.target.value)} required /></label><div className="registration-row"><label>Team size<select value={form.teamSize} onChange={(inputEvent) => update('teamSize', inputEvent.target.value)}><option value="1">Just me</option><option value="2">2 members</option><option value="3">3 members</option><option value="4">4 members</option></select></label><label>Focus track<select value={form.track} onChange={(inputEvent) => update('track', inputEvent.target.value)}>{event.tags.map((tag) => <option key={tag}>{tag}</option>)}<option>General</option></select></label></div></div><label className="agreement"><input type="checkbox" checked={form.agreed} onChange={(inputEvent) => update('agreed', inputEvent.target.checked)} /><span>I confirm these details are correct and I want to register for this opportunity.</span></label>{error && <p className="registration-error" role="alert">{error}</p>}<button className="register-button registration-submit" type="submit">Confirm registration <Icon name="check" size={16} /></button><p className="registration-note">{event.price === 'Free' ? 'Free registration · No payment details needed' : `Entry: ${event.price} · Confirmation saved to your profile`}</p></form></div>
+}

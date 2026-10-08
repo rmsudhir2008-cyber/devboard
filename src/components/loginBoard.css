@@ -1,0 +1,143 @@
+/* DevBoard board illustration used on the official sign-in page */
+.login-board-visual {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: min(445px, 76%);
+  padding: 15px;
+  border: 1px solid #ffffff2c;
+  border-radius: 18px;
+  color: #fff;
+  background: linear-gradient(145deg, #ffffff1e, #ffffff08);
+  box-shadow: 0 28px 65px #06021e75, inset 0 1px #ffffff29;
+  backdrop-filter: blur(13px);
+  transform: translate(-50%, -52%) rotate(-3deg);
+  animation: board-float 5.5s ease-in-out infinite;
+}
+
+.board-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1px 2px 13px;
+  border-bottom: 1px solid #ffffff21;
+  font: 600 10px 'DM Mono', monospace;
+  letter-spacing: .3px;
+}
+
+.board-top > span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  letter-spacing: -.4px;
+}
+
+.board-top i {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  color: #33206d;
+  background: #fff;
+  font-style: normal;
+  font-size: 9px;
+  letter-spacing: -3px;
+}
+
+.board-top b {
+  padding: 4px 6px;
+  border: 1px solid #ffffff29;
+  border-radius: 9px;
+  color: #d6cbff;
+  font-size: 8px;
+  letter-spacing: .65px;
+}
+
+.board-cards {
+  display: grid;
+  gap: 10px;
+  margin: 14px 0;
+}
+
+.board-event {
+  position: relative;
+  display: grid;
+  gap: 4px;
+  min-height: 80px;
+  padding: 12px 13px 11px 96px;
+  overflow: hidden;
+  border: 1px solid #ffffff26;
+  border-radius: 10px;
+  background: #1b1443bb;
+  box-shadow: 0 8px 18px #10072c33;
+}
+
+.board-event::before {
+  content: '';
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  width: 63px;
+  height: 63px;
+  border: 1px solid #ffffff6e;
+  border-radius: 15px;
+  transform: translateY(-50%) rotate(-8deg);
+  box-shadow: inset 0 0 0 9px #ffffff13;
+}
+
+.board-event::after {
+  content: '';
+  position: absolute;
+  left: 37px;
+  top: 50%;
+  width: 17px;
+  height: 17px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  opacity: .9;
+}
+
+.board-event:nth-child(2) { margin-left: 16px; }
+.board-event:nth-child(3) { margin-right: 13px; }
+.board-event small { color: #ffffffa6; font: 500 8px 'DM Mono', monospace; letter-spacing: .8px; }
+.board-event b { font-size: 13px; letter-spacing: -.25px; }
+.board-event span { color: #ffffffbf; font-size: 10px; }
+
+.board-violet { background: linear-gradient(100deg, #6045d5, #2c1d70); }
+.board-violet::after { box-shadow: 16px -10px 0 -6px #fff; }
+.board-orange { background: linear-gradient(100deg, #dd654b, #7d224c); }
+.board-orange::before { border-radius: 50%; transform: translateY(-50%) rotate(25deg); }
+.board-orange::after { width: 20px; height: 20px; border-radius: 5px; box-shadow: 13px 13px 0 -7px #fff; }
+.board-blue { background: linear-gradient(100deg, #207db9, #193f85); }
+.board-blue::before { border-radius: 50%; box-shadow: inset 0 0 0 9px #ffffff13, 15px -9px 0 -5px #ffffff53; }
+.board-blue::after { width: 6px; height: 6px; background: #fff; box-shadow: 14px -8px #fff, -12px 10px #fff, 20px 14px #fff; }
+
+.board-progress {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 2px 2px 0;
+  color: #ded7ff;
+  font: 500 8px 'DM Mono', monospace;
+  letter-spacing: .55px;
+}
+
+.board-progress i { height: 5px; overflow: hidden; border-radius: 8px; background: #ffffff29; }
+.board-progress i b { display: block; width: 68%; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #a98fff, #fff); animation: progress-glow 2.5s ease-in-out infinite; }
+.board-progress em { color: #fff; font-size: 10px; font-style: normal; letter-spacing: 0; }
+.official-login-aside:hover .login-board-visual { animation-play-state: paused; transform: translate(-50%, -52%) rotate(0); }
+
+@keyframes board-float {
+  0%, 100% { margin-top: 0; }
+  50% { margin-top: -13px; }
+}
+
+@keyframes progress-glow {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.45); }
+}

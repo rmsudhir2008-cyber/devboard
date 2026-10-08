@@ -1,0 +1,9 @@
+import { useState } from 'react'
+import { profiles } from '../data/profiles'
+import { Icon } from './Icon'
+
+export function RolePicker({ onContinue, initialRole = 'Student' }) {
+  const [selection, setSelection] = useState(initialRole)
+  const profile = profiles[selection]
+  return <main className="role-picker"><section className="role-card" aria-labelledby="role-title"><a className="brand role-brand" href="#top"><span className="brand-mark">&lt;/&gt;</span>devboard</a><p className="eyebrow"><span /> ONE LAST THING</p><h1 id="role-title">What brings you<br />to <em>DevBoard?</em></h1><p className="role-intro">Choose the perspective that fits today. We’ll shape the starting point around it, and you can switch anytime.</p><div className="role-options" role="radiogroup" aria-label="Choose your DevBoard experience">{Object.entries(profiles).map(([name, item]) => <button key={name} role="radio" aria-checked={selection === name} className={selection === name ? 'selected' : ''} onClick={() => setSelection(name)}><span className="role-icon">{item.icon}</span><span><b>{item.label}</b><small>{name === 'Student' ? 'Learn, build, and meet collaborators.' : name === 'Professor' ? 'Teach, research, and bring ideas to class.' : 'Track signals, makers, and the next wave.'}</small></span><i>{selection === name ? <Icon name="check" size={17} /> : ''}</i></button>)}</div><div className="role-preview"><span>{profile.icon}</span><p><b>Your {profile.label} board</b>{profile.discoveryNote}</p></div><button className="role-continue" onClick={() => onContinue(selection)}>Continue as {profile.label} <Icon name="arrow" size={17} /></button></section><aside className="role-aside" aria-hidden="true"><div className="role-orbit"><span /><i /><b /></div><p>THE RIGHT<br />ROOM CAN<br /><em>CHANGE EVERYTHING.</em></p></aside></main>
+}
